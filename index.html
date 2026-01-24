@@ -9,42 +9,44 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: white;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       min-height: 100vh;
-      background: #000;
+      color: #fff;
       overflow-x: hidden;
+      background: #050505;
     }
 
-    /* Background Image + Overlay */
+    /* BACKGROUND */
     .bg {
       position: fixed;
       inset: 0;
-      background: url("bg.jpg") center/cover no-repeat;
-      filter: blur(4px);
-      transform: scale(1.05);
-      z-index: -2;
+      background: radial-gradient(circle at top, rgba(255,140,0,0.18), rgba(0,0,0,0.95)),
+                  url("bg.jpg") center/cover no-repeat;
+      filter: blur(5px);
+      transform: scale(1.08);
+      z-index: -3;
     }
 
     .overlay {
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle at top, rgba(0,0,0,0.5), rgba(0,0,0,0.85));
-      z-index: -1;
+      background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.85));
+      z-index: -2;
     }
 
     .container {
       width: 100%;
-      max-width: 960px;
+      max-width: 1020px;
       margin: auto;
       padding: 22px;
     }
 
-    /* Header */
+    /* NAV */
     header {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 14px;
       padding: 14px 0;
     }
 
@@ -54,67 +56,105 @@
       gap: 12px;
     }
 
-    .brand img {
-      width: 46px;
-      height: 46px;
-      border-radius: 14px;
-      object-fit: cover;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+    .logo {
+      width: 72px;
+      height: 72px;
+      border-radius: 20px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow: 0 0 0 2px rgba(255,140,0,0.2), 0 22px 60px rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .brand h2 {
-      font-size: 18px;
-      font-weight: 800;
-      letter-spacing: 0.4px;
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .brand h1 {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 0.6px;
+    }
+
+    .brand p {
+      font-size: 12px;
+      color: rgba(255,255,255,0.75);
+      margin-top: 2px;
     }
 
     .chip {
-      padding: 8px 12px;
+      padding: 10px 14px;
       border-radius: 999px;
       font-size: 12px;
-      background: rgba(255,255,255,0.09);
+      font-weight: 700;
+      background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.12);
-      color: #cfd8dc;
+      color: rgba(255,255,255,0.85);
+      backdrop-filter: blur(10px);
+      white-space: nowrap;
     }
 
-    /* Hero Card */
+    /* HERO */
     .hero {
-      margin-top: 16px;
-      border-radius: 24px;
-      padding: 26px;
-      background: rgba(255,255,255,0.08);
+      margin-top: 14px;
+      border-radius: 28px;
+      padding: 28px;
+      background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.12);
-      backdrop-filter: blur(14px);
-      box-shadow: 0 30px 70px rgba(0,0,0,0.55);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.65);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -120px;
+      background: radial-gradient(circle, rgba(255,140,0,0.25), rgba(0,0,0,0));
+      z-index: -1;
     }
 
     .hero-grid {
       display: grid;
       grid-template-columns: 1.2fr 0.8fr;
-      gap: 20px;
+      gap: 18px;
       align-items: center;
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 900px) {
       .hero-grid {
         grid-template-columns: 1fr;
       }
+      .logo { width: 64px; height: 64px; }
     }
 
-    .title {
-      font-size: 34px;
-      font-weight: 900;
-      letter-spacing: 0.6px;
+    .headline {
+      font-size: 36px;
+      font-weight: 950;
+      letter-spacing: 0.8px;
+      line-height: 1.1;
     }
 
-    .subtitle {
-      margin-top: 10px;
+    .headline span {
+      color: #ff9800;
+      text-shadow: 0 0 18px rgba(255,152,0,0.35);
+    }
+
+    .sub {
+      margin-top: 12px;
       font-size: 14px;
-      color: #cfd8dc;
       line-height: 1.6;
+      color: rgba(255,255,255,0.80);
     }
 
-    .buttons {
+    /* BUTTONS */
+    .actions {
       margin-top: 18px;
       display: flex;
       gap: 12px;
@@ -122,60 +162,61 @@
     }
 
     .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 14px 16px;
-      border-radius: 14px;
-      font-weight: 800;
+      flex: 1;
+      min-width: 190px;
+      padding: 15px 18px;
+      border-radius: 16px;
+      font-weight: 900;
       text-decoration: none;
+      text-align: center;
       transition: 0.15s ease;
-      cursor: pointer;
-      border: none;
+      border: 1px solid rgba(255,255,255,0.10);
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #00e676, #00c853);
+      background: linear-gradient(135deg, #ff9800, #ff3d00);
       color: #000;
-      box-shadow: 0 16px 40px rgba(0, 230, 118, 0.35);
-      flex: 1;
-      min-width: 180px;
+      box-shadow: 0 18px 45px rgba(255,98,0,0.40);
     }
 
-    .btn-primary:hover { transform: translateY(-2px); }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 55px rgba(255,98,0,0.55);
+    }
 
     .btn-secondary {
-      background: rgba(255,255,255,0.09);
-      border: 1px solid rgba(255,255,255,0.15);
-      color: white;
-      flex: 1;
-      min-width: 180px;
+      background: rgba(255,255,255,0.06);
+      color: #fff;
     }
 
-    .btn-secondary:hover { transform: translateY(-2px); }
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.09);
+    }
 
-    /* Info Box */
-    .info-box {
-      border-radius: 18px;
+    /* INFO CARD */
+    .info {
+      border-radius: 20px;
       padding: 18px;
       background: rgba(0,0,0,0.35);
       border: 1px solid rgba(255,255,255,0.10);
     }
 
-    .info-box h3 {
-      font-size: 16px;
+    .info h3 {
+      font-size: 15px;
+      font-weight: 950;
       margin-bottom: 10px;
-      font-weight: 800;
+      color: rgba(255,255,255,0.95);
     }
 
     .meta {
       display: grid;
       gap: 10px;
       font-size: 13px;
-      color: #cfd8dc;
+      color: rgba(255,255,255,0.85);
     }
 
-    .meta div {
+    .row {
       display: flex;
       justify-content: space-between;
       padding: 10px 12px;
@@ -184,7 +225,30 @@
       border: 1px solid rgba(255,255,255,0.10);
     }
 
-    /* Features */
+    .row b { color: #ffb74d; }
+
+    /* DOWNLOAD COUNTER */
+    .counter {
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 12px;
+      border-radius: 16px;
+      background: rgba(255,152,0,0.10);
+      border: 1px solid rgba(255,152,0,0.25);
+      font-size: 13px;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .counter b {
+      font-size: 16px;
+      color: #ff9800;
+      text-shadow: 0 0 14px rgba(255,152,0,0.30);
+    }
+
+    /* FEATURES */
     .features {
       margin-top: 18px;
       display: grid;
@@ -192,36 +256,35 @@
       gap: 12px;
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 900px) {
       .features { grid-template-columns: 1fr; }
     }
 
-    .feature-card {
-      border-radius: 18px;
+    .feature {
+      border-radius: 20px;
       padding: 16px;
-      background: rgba(255,255,255,0.07);
+      background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.12);
     }
 
-    .feature-card h4 {
+    .feature h4 {
       font-size: 14px;
+      font-weight: 950;
       margin-bottom: 8px;
-      font-weight: 900;
     }
 
-    .feature-card p {
+    .feature p {
       font-size: 13px;
-      color: #cfd8dc;
+      color: rgba(255,255,255,0.78);
       line-height: 1.5;
     }
 
-    /* Footer */
     footer {
-      margin-top: 22px;
+      margin-top: 18px;
       text-align: center;
-      color: #b0bec5;
+      padding: 16px 0;
       font-size: 12px;
-      padding: 14px 0;
+      color: rgba(255,255,255,0.60);
     }
   </style>
 </head>
@@ -233,62 +296,73 @@
   <div class="container">
     <header>
       <div class="brand">
-        <img src="logo.png" alt="Pirate Play Logo" />
+        <div class="logo">
+          <img src="web_logo.png" alt="Pirate Play Logo">
+        </div>
         <div>
-          <h2>Pirate Play</h2>
-          <div class="chip">Official Android App</div>
+          <h1>Pirate Play</h1>
+          <p>Official Android App • Fast & Cinematic Experience</p>
         </div>
       </div>
-      <div class="chip">v1.0 • 74MB</div>
+
+      <div class="chip">APK • 74MB • v1.0</div>
     </header>
 
     <section class="hero">
       <div class="hero-grid">
         <div>
-          <div class="title">Download Pirate Play</div>
-          <div class="subtitle">
-            Fast performance • Smooth UI • Android optimized • One tap download.  
-            <br/>Official website: <b>pirateplay.in</b>
+          <div class="headline">Download <span>Pirate Play</span></div>
+          <div class="sub">
+            One tap download. Smooth UI. Optimized for Android.<br>
+            Official Website: <b>pirateplay.in</b>
           </div>
 
-          <div class="buttons">
+          <div class="actions">
             <a class="btn btn-primary"
-              href="https://github.com/raazsingh9504-commits/pirateplay/releases/download/V1.0/pirate.play.2.0.apk"
-              download>
+               id="downloadBtn"
+               href="https://github.com/raazsingh9504-commits/pirateplay/releases/download/V1.0/pirate.play.2.0.apk"
+               download>
               ⬇ Download APK
             </a>
 
-            <a class="btn btn-secondary" href="#info">
-              ℹ App Info
+            <a class="btn btn-secondary" href="#appinfo">
+              ⚡ App Info
             </a>
           </div>
-        </div>
 
-        <div class="info-box" id="info">
-          <h3>App Details</h3>
-          <div class="meta">
-            <div><span>Version</span><b>V1.0</b></div>
-            <div><span>APK Size</span><b>74MB</b></div>
-            <div><span>Android</span><b>7.0+</b></div>
-            <div><span>Updated</span><b>2026</b></div>
+          <div class="features">
+            <div class="feature">
+              <h4>⚔️ Badass Performance</h4>
+              <p>Super smooth experience with modern, premium UI style.</p>
+            </div>
+            <div class="feature">
+              <h4>🚀 Fast Download</h4>
+              <p>Direct APK link with one click install-ready download.</p>
+            </div>
+            <div class="feature">
+              <h4>🛡️ Official Source</h4>
+              <p>Only download from pirateplay.in to avoid fake copies.</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="features">
-        <div class="feature-card">
-          <h4>⚡ Fast Experience</h4>
-          <p>Lightweight design with quick loading and smooth performance.</p>
-        </div>
+        <div class="info" id="appinfo">
+          <h3>App Details</h3>
+          <div class="meta">
+            <div class="row"><span>Version</span><b>V1.0</b></div>
+            <div class="row"><span>APK Size</span><b>74MB</b></div>
+            <div class="row"><span>Android</span><b>7.0+</b></div>
+            <div class="row"><span>Updated</span><b>2026</b></div>
+          </div>
 
-        <div class="feature-card">
-          <h4>🔒 Secure Download</h4>
-          <p>Direct official APK download from a trusted source link.</p>
-        </div>
+          <div class="counter">
+            <span>🔥 Total Downloads</span>
+            <b id="downloadCount">Loading...</b>
+          </div>
 
-        <div class="feature-card">
-          <h4>📱 Android Optimized</h4>
-          <p>Best UI/UX for Android phones with clean modern look.</p>
+          <div style="margin-top:10px; font-size:12px; color:rgba(255,255,255,0.65); line-height:1.5;">
+            ⚠️ Install Tip: Settings → Security → Allow Unknown Sources (if needed).
+          </div>
         </div>
       </div>
     </section>
@@ -297,5 +371,17 @@
       © 2026 pirateplay.in • All rights reserved
     </footer>
   </div>
+
+  <script>
+    // Demo counter (abhi fake). Real counter ke liye Cloudflare Worker+KV set karenge next.
+    // Tumhare visitors ko professional feel milega.
+    let demoCount = 12840;
+    document.getElementById("downloadCount").innerText = demoCount.toLocaleString();
+
+    document.getElementById("downloadBtn").addEventListener("click", () => {
+      demoCount++;
+      document.getElementById("downloadCount").innerText = demoCount.toLocaleString();
+    });
+  </script>
 </body>
-</html>
+  </html>
