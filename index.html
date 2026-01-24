@@ -3,35 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pirate Play – Official Android App</title>
+  <title>Pirate Play – Official App</title>
+
+  <!-- ✅ Basic security + SEO -->
+  <meta name="referrer" content="no-referrer" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#0b0f16" />
 
   <style>
     :root{
-      --bg1:#05060a;
-      --bg2:#0b1220;
+      --bg0:#070911;
+      --bg1:#0b1220;
+      --bg2:#0f1a2e;
       --glass: rgba(255,255,255,0.06);
-      --stroke: rgba(255,255,255,0.10);
+      --stroke: rgba(255,255,255,0.12);
       --text:#ffffff;
-      --muted: rgba(255,255,255,0.70);
+      --muted: rgba(255,255,255,0.72);
       --muted2: rgba(255,255,255,0.55);
-      --accent:#ff7a18;
+
+      --accent1:#ff7a18;
       --accent2:#ffb01f;
-      --btn:#ff7a18;
-      --btn2:#ffb01f;
-      --shadow: 0 30px 80px rgba(0,0,0,0.55);
-      --radius: 22px;
+
+      --shadow: 0 35px 90px rgba(0,0,0,0.62);
+      --radius: 26px;
     }
 
     *{ box-sizing: border-box; }
+    html,body{ height:100%; }
     body{
       margin:0;
-      min-height:100vh;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(900px 450px at 70% 25%, rgba(255,122,24,0.20), transparent 60%),
-        radial-gradient(700px 380px at 25% 70%, rgba(255,176,31,0.12), transparent 60%),
-        linear-gradient(180deg, var(--bg1), var(--bg2));
+        radial-gradient(1100px 520px at 70% 20%, rgba(255,122,24,0.22), transparent 60%),
+        radial-gradient(900px 500px at 25% 80%, rgba(255,176,31,0.14), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1) 45%, var(--bg2));
       display:flex;
       align-items:center;
       justify-content:center;
@@ -39,231 +45,225 @@
       overflow-x:hidden;
     }
 
+    /* subtle animated shine */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:-40%;
+      background: conic-gradient(from 180deg,
+        transparent 0deg,
+        rgba(255,122,24,0.10) 40deg,
+        transparent 90deg,
+        rgba(255,176,31,0.08) 140deg,
+        transparent 220deg,
+        rgba(255,122,24,0.10) 300deg,
+        transparent 360deg
+      );
+      filter: blur(60px);
+      opacity: .75;
+      animation: spin 14s linear infinite;
+      pointer-events:none;
+      z-index:0;
+    }
+
+    @keyframes spin{
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
     .wrap{
-      width: min(480px, 100%);
+      width: min(520px, 100%);
+      position: relative;
+      z-index: 2;
     }
 
     .card{
+      position: relative;
       background: var(--glass);
       border: 1px solid var(--stroke);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(16px);
-      padding: 18px;
-      position: relative;
-      overflow: hidden;
+      backdrop-filter: blur(18px);
+      overflow:hidden;
     }
 
-    /* glow */
-    .card::before{
+    .card::after{
       content:"";
       position:absolute;
       inset:-2px;
-      background:
-        radial-gradient(500px 250px at 10% 10%, rgba(255,122,24,0.28), transparent 55%),
-        radial-gradient(400px 220px at 90% 15%, rgba(255,176,31,0.20), transparent 55%);
-      filter: blur(18px);
-      opacity: 0.8;
+      background: radial-gradient(600px 200px at 50% 0%,
+        rgba(255,122,24,0.22),
+        transparent 60%);
       pointer-events:none;
+      z-index:0;
     }
 
-    .top{
-      position: relative;
-      display:flex;
-      gap:14px;
-      align-items:center;
-      padding: 10px 10px 6px;
+    .inner{
+      position:relative;
+      z-index:1;
+      padding: 22px;
     }
 
-    .logo{
-      width: 72px;
-      height: 72px;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.15);
-      background: rgba(0,0,0,0.35);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
-      overflow:hidden;
+    .topLabel{
+      text-align:center;
+      font-weight: 900;
+      letter-spacing: 2.8px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.78);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .appTitle{
+      text-align:center;
+      margin: 10px 0 0;
+      font-size: 34px;
+      font-weight: 1000;
+      letter-spacing: .4px;
+    }
+
+    .logoWrap{
       display:flex;
       align-items:center;
       justify-content:center;
-      flex-shrink:0;
+      margin: 16px 0 10px;
+    }
+
+    .logo{
+      width: 118px;
+      height: 118px;
+      border-radius: 28px;
+      overflow:hidden;
+      background: rgba(0,0,0,0.40);
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.55);
+      position: relative;
+    }
+
+    .logo::before{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background: radial-gradient(circle, rgba(255,176,31,0.25), transparent 60%);
+      filter: blur(18px);
+      z-index:0;
     }
 
     .logo img{
-      width: 100%;
-      height: 100%;
+      position:relative;
+      z-index:1;
+      width:100%;
+      height:100%;
       object-fit: cover;
       display:block;
     }
 
-    .titleBox{
-      flex:1;
-      min-width:0;
-    }
-
-    .appName{
-      font-size: 24px;
-      font-weight: 800;
-      letter-spacing: 0.3px;
-      margin:0;
-      line-height: 1.1;
-    }
-
-    .sub{
-      margin-top: 6px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .chipRow{
+    .chips{
       display:flex;
-      gap:8px;
+      gap:10px;
       flex-wrap: wrap;
-      margin-top:10px;
+      justify-content:center;
+      margin: 12px 0 10px;
     }
 
     .chip{
-      font-size:12px;
-      padding: 7px 10px;
+      padding: 10px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(0,0,0,0.25);
-      color: rgba(255,255,255,0.82);
-    }
-
-    .hero{
-      position: relative;
-      padding: 10px 10px 0;
+      font-size: 13px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(0,0,0,0.28);
+      color: rgba(255,255,255,0.88);
     }
 
     .headline{
+      text-align:center;
+      margin: 12px 0 18px;
+      color: var(--muted);
+      line-height: 1.55;
       font-size: 14px;
-      color: var(--muted2);
-      line-height:1.6;
-      margin: 6px 0 14px;
+    }
+
+    .btnRow{
+      display:flex;
+      gap:12px;
+      margin-top: 6px;
     }
 
     .btn{
+      flex:1;
       display:flex;
       align-items:center;
       justify-content:center;
       gap:10px;
-      width:100%;
       padding: 16px 14px;
-      border-radius: 16px;
+      border-radius: 18px;
       border: 0;
       cursor:pointer;
-      font-weight: 800;
-      font-size: 17px;
-      color:#120900;
-      background: linear-gradient(135deg, var(--btn), var(--btn2));
-      box-shadow: 0 18px 35px rgba(255, 122, 24, 0.25);
-      transition: transform .15s ease, box-shadow .15s ease;
       text-decoration:none;
+      font-weight: 950;
+      font-size: 16px;
       user-select:none;
+      transition: transform .12s ease, filter .12s ease;
+      box-shadow: 0 18px 45px rgba(0,0,0,0.32);
     }
 
-    .btn:active{
-      transform: scale(0.985);
-      box-shadow: 0 12px 25px rgba(255, 122, 24, 0.22);
+    .btn:active{ transform: scale(0.985); }
+
+    .btnPrimary{
+      color:#1b0c00;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
     }
 
-    .grid{
-      position: relative;
-      margin-top: 14px;
+    .btnPrimary:hover{ filter: brightness(1.03); }
+
+    .smallNote{
+      text-align:center;
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--muted2);
+    }
+
+    /* minimal premium section */
+    .miniGrid{
+      margin-top: 16px;
       display:grid;
+      gap: 12px;
       grid-template-columns: 1fr;
-      gap:10px;
-      padding: 0 10px 10px;
     }
 
-    .box{
-      border-radius: 18px;
-      padding: 14px 14px;
+    .panel{
       background: rgba(0,0,0,0.30);
       border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 20px;
+      padding: 14px 14px;
     }
 
-    .boxTitle{
-      font-weight: 800;
-      font-size: 14px;
+    .panelTitle{
       margin:0 0 6px;
-      display:flex;
-      align-items:center;
-      gap:8px;
+      font-weight: 900;
+      font-size: 14px;
+      letter-spacing: .2px;
     }
 
-    .boxText{
+    .panelText{
       margin:0;
       color: var(--muted);
       font-size: 13px;
       line-height: 1.6;
     }
 
-    .details{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:10px;
-      margin-top: 10px;
-    }
-
-    .stat{
-      border-radius: 16px;
-      padding: 12px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.10);
-    }
-
-    .statLabel{
-      font-size: 11px;
-      color: var(--muted2);
-      margin-bottom: 6px;
-    }
-
-    .statValue{
-      font-size: 15px;
-      font-weight: 800;
-    }
-
-    .downloads{
-      margin-top: 10px;
-      text-align:center;
-      padding: 12px;
-      border-radius: 16px;
-      background: rgba(255,122,24,0.10);
-      border: 1px solid rgba(255,122,24,0.22);
-    }
-
-    .downloads small{
-      display:block;
-      color: rgba(255,255,255,0.70);
-      margin-bottom: 4px;
-    }
-
-    .downloads b{
-      font-size: 20px;
-      letter-spacing: 0.3px;
-    }
-
     .footer{
       text-align:center;
-      margin-top: 12px;
+      margin-top: 14px;
       color: rgba(255,255,255,0.55);
       font-size: 12px;
     }
 
-    .tip{
-      margin-top: 10px;
-      color: rgba(255,255,255,0.55);
-      font-size: 12px;
-      text-align:center;
-    }
-
-    .mini{
-      font-size: 11px;
-      color: rgba(255,255,255,0.55);
-      margin-top: 8px;
-      text-align:center;
+    /* responsive */
+    @media (max-width: 360px){
+      .appTitle{ font-size: 30px; }
+      .logo{ width: 104px; height: 104px; }
+      .chip{ font-size: 12px; padding: 9px 12px; }
     }
   </style>
 </head>
@@ -271,128 +271,61 @@
 <body>
   <div class="wrap">
     <div class="card">
+      <div class="inner">
 
-      <div class="top">
-        <div class="logo">
-          <!-- ✅ IMPORTANT: filename must match exactly -->
-          <img src="Web_logo.png" alt="Pirate Play Logo" />
-        </div>
+        <!-- ✅ Top text -->
+        <div class="topLabel">PIRATE PLAY OFFICIAL APP</div>
 
-        <div class="titleBox">
-          <h1 class="appName">Pirate Play</h1>
-          <div class="sub">Official Android App</div>
+        <!-- ✅ App name -->
+        <h1 class="appTitle">Pirate Play</h1>
 
-          <div class="chipRow">
-            <div class="chip">APK • 74MB</div>
-            <div class="chip">Version • v1.0</div>
-            <div class="chip">Android • 7.0+</div>
+        <!-- ✅ Center big logo -->
+        <div class="logoWrap">
+          <div class="logo">
+            <img src="./Web_logo.png" alt="Pirate Play Logo" />
           </div>
         </div>
-      </div>
 
-      <div class="hero">
-        <p class="headline">
-          One tap download. Smooth UI. Optimized for Android.
-          <br>
+        <!-- ✅ Chips BELOW logo -->
+        <div class="chips">
+          <div class="chip">APK • 74MB</div>
+          <div class="chip">Version • v1.0</div>
+          <div class="chip">Android • 7.0+</div>
+        </div>
+
+        <div class="headline">
+          One tap download. Smooth UI. Optimized for Android.<br>
           Official Website: <b>pirateplay.in</b>
-        </p>
-
-        <!-- ✅ Download Button -->
-        <a class="btn"
-           id="downloadBtn"
-           href="https://github.com/raazsingh9504-commits/pirateplay/releases/download/V1.0/pirate.play.2.0.apk">
-          ⬇️ Download APK
-        </a>
-
-        <div class="mini">Tip: Settings → Security → Allow Unknown Sources (if needed)</div>
-      </div>
-
-      <div class="grid">
-
-        <div class="box">
-          <div class="boxTitle">⚡ Badass Performance</div>
-          <p class="boxText">Super smooth experience with modern, premium UI style.</p>
         </div>
 
-        <div class="box">
-          <div class="boxTitle">🚀 Fast Download</div>
-          <p class="boxText">Direct APK link with one click install-ready download.</p>
+        <div class="btnRow">
+          <a class="btn btnPrimary"
+             href="https://github.com/raazsingh9504-commits/pirateplay/releases/download/V1.0/pirate.play.2.0.apk">
+            ⬇️ Download APK
+          </a>
         </div>
 
-        <div class="box">
-          <div class="boxTitle">🛡️ Official Source</div>
-          <p class="boxText">Only download from pirateplay.in to avoid fake copies.</p>
+        <div class="smallNote">
+          Install Tip: Settings → Security → Allow Unknown Sources (if needed)
         </div>
 
-        <div class="details">
-          <div class="stat">
-            <div class="statLabel">Version</div>
-            <div class="statValue">V1.0</div>
+        <!-- ✅ Clean premium panels -->
+        <div class="miniGrid">
+          <div class="panel">
+            <div class="panelTitle">⚡ Smooth & Fast</div>
+            <p class="panelText">Lightweight UI and quick launch experience made for Android.</p>
           </div>
-          <div class="stat">
-            <div class="statLabel">APK Size</div>
-            <div class="statValue">74MB</div>
+
+          <div class="panel">
+            <div class="panelTitle">🛡️ Official Source</div>
+            <p class="panelText">Download only from pirateplay.in to avoid fake copies.</p>
           </div>
         </div>
 
-        <!-- ✅ Download counter -->
-        <div class="downloads">
-          <small>Total Downloads</small>
-          <b id="downloadCount">—</b>
-        </div>
-
-        <div class="tip">
-          This counter will be live after Cloudflare Worker setup ✅
-        </div>
-
       </div>
-
     </div>
 
     <div class="footer">© 2026 pirateplay.in • All rights reserved</div>
   </div>
-
-  <script>
-    // ✅ Cloudflare Worker API (we will create next)
-    // Example: https://api.pirateplay.in/count
-    // We'll set this later, abhi placeholder hai.
-    const API_BASE = ""; // leave empty for now
-
-    const countEl = document.getElementById("downloadCount");
-    const btn = document.getElementById("downloadBtn");
-
-    // ✅ If API not configured yet -> show default
-    function showFallback(){
-      countEl.textContent = "12,840"; // Temporary fake count (remove later)
-    }
-
-    async function loadCount(){
-      try{
-        if(!API_BASE){
-          showFallback();
-          return;
-        }
-        const res = await fetch(API_BASE + "/count");
-        const data = await res.json();
-        countEl.textContent = (data.downloads || 0).toLocaleString("en-IN");
-      }catch(e){
-        showFallback();
-      }
-    }
-
-    async function incrementCount(){
-      try{
-        if(!API_BASE) return;
-        await fetch(API_BASE + "/hit", { method:"POST" });
-      }catch(e){}
-    }
-
-    btn.addEventListener("click", async () => {
-      // user click -> increment count (Cloudflare worker)
-      incrementCount();
-    });
-
-    loadCount();
-  </script>
 </body>
 </html>
