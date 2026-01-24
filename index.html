@@ -15,6 +15,8 @@
       --muted: rgba(255,255,255,.65);
       --orange1:#ff8a00;
       --orange2:#ff5a00;
+      --green1:#00e676;
+      --green2:#00c853;
     }
 
     *{ box-sizing:border-box; }
@@ -31,10 +33,9 @@
         radial-gradient(900px 650px at 50% 100%, rgba(255,160,50,.10), transparent 60%),
         linear-gradient(135deg, var(--bg1), var(--bg2));
 
-      display:block;
-
       padding: 26px 14px 28px;
       padding-top: calc(26px + env(safe-area-inset-top));
+      min-height: 100vh;
     }
 
     .page{
@@ -97,8 +98,8 @@
     }
 
     .logoBox{
-      width: 120px;
-      height: 120px;
+      width: 122px;
+      height: 122px;
       border-radius: 30px;
       padding: 8px;
       background: rgba(0,0,0,.30);
@@ -182,16 +183,48 @@
       user-select:none;
       -webkit-tap-highlight-color: transparent;
     }
-    .btn:active{
-      transform: scale(.98);
-      box-shadow: 0 10px 25px rgba(255,110,0,.18);
+    .btn:active{ transform: scale(.98); }
+
+    .btnGuide{
+      width: 100%;
+      border:none;
+      cursor:pointer;
+      text-align:center;
+      padding: 14px 16px;
+      border-radius: 16px;
+      font-size: 15px;
+      font-weight: 950;
+      color: #021a08;
+      background: linear-gradient(135deg, var(--green1), var(--green2));
+      box-shadow: 0 16px 35px rgba(0,230,118,.20);
+      transition: transform .15s ease;
+      -webkit-tap-highlight-color: transparent;
     }
+    .btnGuide:active{ transform: scale(.98); }
 
     .hint{
       font-size: 12px;
       color: rgba(255,255,255,.55);
       text-align:center;
       margin-top: -2px;
+    }
+
+    .bannerWrap{
+      width:100%;
+      margin-top: 6px;
+      border-radius: 16px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 14px 35px rgba(0,0,0,.35);
+      background: rgba(0,0,0,.18);
+    }
+    .banner{
+      width:100%;
+      height:auto;
+      display:block;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      opacity: .95;
     }
 
     .grid{
@@ -211,7 +244,6 @@
       text-align:left;
       box-shadow: 0 14px 35px rgba(0,0,0,.35);
     }
-
     .tile .k{
       font-size: 12px;
       letter-spacing:.10em;
@@ -220,7 +252,6 @@
       font-weight:900;
       margin-bottom: 6px;
     }
-
     .tile .v{
       font-size: 22px;
       font-weight: 950;
@@ -238,7 +269,6 @@
       position:relative;
       z-index:2;
     }
-
     .counterTitle{
       font-size: 12px;
       letter-spacing: .18em;
@@ -247,13 +277,11 @@
       text-transform: uppercase;
       margin-bottom: 8px;
     }
-
     .counterNum{
       font-size: 34px;
       font-weight: 950;
       line-height: 1;
     }
-
     .status{
       font-size: 12px;
       color: rgba(255,255,255,.55);
@@ -269,9 +297,95 @@
       color: rgba(255,255,255,.50);
     }
 
+    /* ✅ POPUP / MODAL */
+    .modal{
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+      background: rgba(0,0,0,.65);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .modal.show{ display:flex; }
+
+    .modalBox{
+      width: 100%;
+      max-width: 520px;
+      max-height: 86vh;
+      background: rgba(10,10,10,.85);
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 18px;
+      overflow:hidden;
+      box-shadow: 0 30px 90px rgba(0,0,0,.7);
+      position:relative;
+    }
+
+    .modalTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+    .modalTitle{
+      font-weight: 950;
+      letter-spacing:.08em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: rgba(255,255,255,.85);
+    }
+    .closeBtn{
+      border:none;
+      background: rgba(255,255,255,.10);
+      color: rgba(255,255,255,.95);
+      padding: 8px 10px;
+      border-radius: 10px;
+      font-weight:900;
+      cursor:pointer;
+    }
+
+    .slider{
+      display:flex;
+      overflow-x:auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .slider::-webkit-scrollbar{ display:none; }
+
+    .slide{
+      flex: 0 0 100%;
+      scroll-snap-align: center;
+      padding: 12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .slide img{
+      width: 100%;
+      height: auto;
+      max-height: 70vh;
+      object-fit: contain;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.35);
+    }
+
+    .modalHint{
+      padding: 10px 14px 14px;
+      font-size: 12px;
+      color: rgba(255,255,255,.60);
+      text-align:center;
+    }
+
     @media (max-width: 360px){
       h1{ font-size: 30px; }
-      .logoBox{ width:110px; height:110px; }
+      .logoBox{ width:112px; height:112px; }
       .btn{ font-size: 17px; padding: 16px; }
       .counterNum{ font-size: 30px; }
     }
@@ -301,9 +415,16 @@
         </div>
 
         <div class="cta">
-          <button class="btn" id="downloadBtn">
-            ⬇ Download APK
-          </button>
+          <button class="btn" id="downloadBtn">⬇ Download APK</button>
+
+          <!-- ✅ Banner -->
+          <div class="bannerWrap">
+            <img src="And_banner.png" class="banner" alt="Pirate Play Banner">
+          </div>
+
+          <!-- ✅ Install Guide Button -->
+          <button class="btnGuide" id="guideBtn">✅ Install Guide</button>
+
           <div class="hint">Fast direct download • Official source only</div>
         </div>
 
@@ -315,7 +436,7 @@
 
         <div class="counterBox">
           <div class="counterTitle">Total Downloads</div>
-          <div class="counterNum" id="count">...</div>
+          <div class="counterNum" id="count">500</div>
           <div class="status" id="statusText">Loading live counter...</div>
         </div>
 
@@ -325,11 +446,31 @@
     </div>
   </div>
 
+  <!-- ✅ POPUP MODAL -->
+  <div class="modal" id="modal">
+    <div class="modalBox" role="dialog" aria-modal="true">
+      <div class="modalTop">
+        <div class="modalTitle">Install Guide</div>
+        <button class="closeBtn" id="closeModal">✕</button>
+      </div>
+
+      <div class="slider" id="slider">
+        <div class="slide"><img src="T1.png" alt="Install Guide 1"></div>
+        <div class="slide"><img src="T2.png" alt="Install Guide 2"></div>
+        <div class="slide"><img src="T3.png" alt="Install Guide 3"></div>
+        <div class="slide"><img src="T4.png" alt="Install Guide 4"></div>
+        <div class="slide"><img src="T5.png" alt="Install Guide 5"></div>
+      </div>
+
+      <div class="modalHint">Swipe ➜ to see next steps • Tap outside to close</div>
+    </div>
+  </div>
+
   <script>
-    // ✅ Your links
+    // ✅ Links
     const APK_URL = "https://github.com/raazsingh9504-commits/pirateplay/releases/download/V1.0/pirate.play.2.0.apk";
 
-    // ✅ Cloudflare Worker endpoints
+    // ✅ Worker endpoints
     const WORKER_BASE = "https://pirateplay-counter.raazsingh9504.workers.dev";
     const COUNT_URL = WORKER_BASE + "/count";
     const INC_URL   = WORKER_BASE + "/inc";
@@ -338,47 +479,89 @@
     const statusEl = document.getElementById("statusText");
     const btn = document.getElementById("downloadBtn");
 
+    const modal = document.getElementById("modal");
+    const guideBtn = document.getElementById("guideBtn");
+    const closeModalBtn = document.getElementById("closeModal");
+
     function formatNumber(n){
-      return (n || 0).toLocaleString("en-IN");
+      return (n || 500).toLocaleString("en-IN");
     }
 
-    async function loadCount(){
-      try{
-        const res = await fetch(COUNT_URL, { cache: "no-store" });
-        const data = await res.json();
-        countEl.textContent = formatNumber(data.downloads);
-        statusEl.textContent = "Live counter ✅";
-      }catch(e){
-        countEl.textContent = "500";
-        statusEl.textContent = "Counter offline (showing default)";
+    function openGuide(){
+      modal.classList.add("show");
+      // open pe start from first image
+      document.getElementById("slider").scrollTo({ left: 0, behavior: "smooth" });
+    }
+    function closeGuide(){
+      modal.classList.remove("show");
+    }
+
+    // ✅ click outside modalBox closes
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeGuide();
+    });
+    closeModalBtn.addEventListener("click", closeGuide);
+    guideBtn.addEventListener("click", openGuide);
+
+    async function loadCountWithRetry(){
+      // ✅ never show 0
+      countEl.textContent = "500";
+      statusEl.textContent = "Loading live counter...";
+
+      for(let i=0;i<3;i++){
+        try{
+          const res = await fetch(COUNT_URL + "?t=" + Date.now(), { cache: "no-store" });
+          const data = await res.json();
+
+          if(typeof data.downloads === "number"){
+            countEl.textContent = formatNumber(data.downloads);
+            statusEl.textContent = "Live counter ✅";
+            return;
+          }
+        }catch(err){
+          // retry
+        }
+        await new Promise(r => setTimeout(r, 500));
       }
+
+      statusEl.textContent = "Counter offline (showing default)";
     }
 
     async function incrementAndDownload(){
       btn.disabled = true;
-      btn.textContent = "⏳ Preparing download...";
+      btn.textContent = "⏳ Starting download...";
+
+      // ✅ Auto open guide popup on download click
+      openGuide();
 
       try{
-        const res = await fetch(INC_URL, { cache: "no-store" });
+        const res = await fetch(INC_URL + "?t=" + Date.now(), { cache: "no-store" });
         const data = await res.json();
 
-        countEl.textContent = formatNumber(data.downloads);
-        statusEl.textContent = "Updated ✅";
-
+        if(typeof data.downloads === "number"){
+          countEl.textContent = formatNumber(data.downloads);
+          statusEl.textContent = "Updated ✅";
+        }
       }catch(e){
         statusEl.textContent = "Counter update failed ❌";
       }
 
-      // ✅ Now redirect to apk
+      // ✅ start download
       setTimeout(() => {
         window.location.href = APK_URL;
-      }, 350);
+      }, 500);
+
+      // ✅ enable button again after 2 sec
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.textContent = "⬇ Download APK";
+      }, 2000);
     }
 
-    // initial load
-    loadCount();
+    // Load count on open
+    loadCountWithRetry();
 
-    // click event
+    // Download click
     btn.addEventListener("click", incrementAndDownload);
   </script>
 </body>
