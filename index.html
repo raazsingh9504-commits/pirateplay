@@ -9,66 +9,72 @@
     :root{
       --bg1:#0b0f14;
       --bg2:#1a0f07;
-      --glass: rgba(15, 15, 15, 0.55);
+      --glass: rgba(12, 12, 12, 0.62);
       --stroke: rgba(255,255,255,.14);
       --text: rgba(255,255,255,.95);
       --muted: rgba(255,255,255,.65);
       --orange1:#ff8a00;
-      --orange2:#ff5f00;
+      --orange2:#ff5a00;
     }
 
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
+
     body{
       margin:0;
       font-family: system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
       color: var(--text);
 
-      /* Badass cinematic background */
       background:
         radial-gradient(700px 400px at 20% 10%, rgba(255,140,0,.20), transparent 55%),
         radial-gradient(700px 450px at 80% 0%, rgba(255,90,0,.18), transparent 60%),
         radial-gradient(900px 650px at 50% 100%, rgba(255,160,50,.10), transparent 60%),
         linear-gradient(135deg, var(--bg1), var(--bg2));
 
-      /* ✅ Safe top spacing (logo cut fix) */
-      padding: 30px 16px 30px 16px;
-      padding-top: calc(30px + env(safe-area-inset-top));
+      /* ✅ FIX: do NOT vertically center (cut issue fix) */
+      display:block;
 
+      /* ✅ FIX: Safe top padding for every device */
+      padding: 26px 14px 28px;
+      padding-top: calc(26px + env(safe-area-inset-top));
+    }
+
+    /* ✅ FIX: Always allow scroll (small devices safe) */
+    .page{
+      min-height: 100vh;
       display:flex;
-      align-items:center;
       justify-content:center;
+      align-items:flex-start;
     }
 
     .wrap{
       width:100%;
-      max-width: 420px;
+      max-width: 440px;
     }
 
     .card{
       width:100%;
-      background: var(--glass);
-      border:1px solid var(--stroke);
       border-radius: 26px;
-      padding: 22px 18px 18px;
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      box-shadow: 0 30px 80px rgba(0,0,0,.60);
-      position: relative;
-      overflow: hidden;
+      padding: 20px 16px 18px;
+      background: var(--glass);
+      border: 1px solid var(--stroke);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 30px 90px rgba(0,0,0,.62);
+      overflow:hidden;
+      position:relative;
     }
 
-    /* cinematic glow */
     .card::before{
       content:"";
       position:absolute;
-      inset:-80px;
+      inset:-100px;
       background:
-        radial-gradient(circle at 30% 20%, rgba(255,140,0,.20), transparent 55%),
-        radial-gradient(circle at 80% 10%, rgba(255,90,0,.18), transparent 55%);
+        radial-gradient(circle at 30% 15%, rgba(255,140,0,.22), transparent 55%),
+        radial-gradient(circle at 80% 12%, rgba(255,90,0,.18), transparent 55%);
       filter: blur(12px);
-      opacity:.9;
       pointer-events:none;
+      opacity: .95;
     }
 
     .topmini{
@@ -77,28 +83,28 @@
       text-align:center;
       font-size: 11px;
       letter-spacing: .22em;
-      font-weight: 800;
-      color: rgba(255,255,255,.75);
+      font-weight: 900;
+      color: rgba(255,255,255,.78);
       text-transform: uppercase;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .hero{
       position:relative;
       z-index:2;
-      text-align:center;
       display:flex;
       flex-direction:column;
       align-items:center;
+      text-align:center;
       gap:10px;
     }
 
+    /* ✅ FIX: Logo always visible, never cut */
     .logoBox{
-      width: 118px;
-      height: 118px;
-      border-radius: 28px;
-      padding: 7px;
-
+      width: 120px;
+      height: 120px;
+      border-radius: 30px;
+      padding: 8px;
       background: rgba(0,0,0,.30);
       border: 1px solid rgba(255,255,255,.18);
       box-shadow:
@@ -107,34 +113,34 @@
       display:flex;
       align-items:center;
       justify-content:center;
+      margin-top: 4px;
     }
 
     .logo{
-      width: 100%;
-      height: 100%;
-      border-radius: 22px;
+      width:100%;
+      height:100%;
       object-fit: cover;
+      border-radius: 22px;
       display:block;
     }
 
     h1{
       margin: 6px 0 0;
       font-size: 34px;
+      font-weight: 950;
       line-height: 1.05;
-      font-weight: 900;
-      letter-spacing: .5px;
       text-shadow: 0 6px 30px rgba(0,0,0,.55);
     }
 
     .subtitle{
-      margin: 0;
-      font-size: 14px;
-      font-weight: 600;
+      margin:0;
+      font-size:14px;
+      font-weight:650;
       color: var(--muted);
     }
 
     .pills{
-      margin-top: 10px;
+      margin-top: 8px;
       display:flex;
       flex-wrap:wrap;
       justify-content:center;
@@ -143,8 +149,8 @@
 
     .pill{
       font-size: 13px;
-      font-weight: 700;
-      color: rgba(255,255,255,.82);
+      font-weight: 800;
+      color: rgba(255,255,255,.84);
       background: rgba(0,0,0,.22);
       border: 1px solid rgba(255,255,255,.12);
       padding: 10px 14px;
@@ -157,7 +163,7 @@
     .cta{
       position:relative;
       z-index:2;
-      margin-top: 16px;
+      margin-top: 14px;
       display:flex;
       flex-direction:column;
       gap:10px;
@@ -166,14 +172,12 @@
 
     .btn{
       width: 100%;
-      border: none;
-      cursor:pointer;
       text-decoration:none;
       text-align:center;
       padding: 18px 18px;
       border-radius: 18px;
       font-size: 18px;
-      font-weight: 900;
+      font-weight: 950;
       color: #140a00;
       background: linear-gradient(135deg, var(--orange1), var(--orange2));
       box-shadow: 0 18px 45px rgba(255,110,0,.25);
@@ -216,44 +220,14 @@
       letter-spacing:.10em;
       text-transform: uppercase;
       color: rgba(255,255,255,.55);
-      font-weight:800;
+      font-weight:900;
       margin-bottom: 6px;
     }
 
     .tile .v{
       font-size: 22px;
-      font-weight: 900;
-      color: rgba(255,255,255,.95);
-    }
-
-    .downloads{
-      margin-top: 14px;
-      position:relative;
-      z-index:2;
-      background: rgba(0,0,0,.20);
-      border: 1px solid rgba(255,165,70,.22);
-      border-radius: 18px;
-      padding: 14px;
-      text-align:center;
-    }
-
-    .downloads .title{
-      font-size: 11px;
-      letter-spacing:.28em;
-      font-weight:900;
-      color: rgba(255,255,255,.65);
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    .downloads .num{
-      font-size: 38px;
       font-weight: 950;
-      background: linear-gradient(135deg, #ffd39b, #ff8a00);
-      -webkit-background-clip:text;
-      background-clip:text;
-      color: transparent;
-      text-shadow: 0 10px 30px rgba(255,140,0,.18);
+      color: rgba(255,255,255,.96);
     }
 
     footer{
@@ -265,7 +239,7 @@
       color: rgba(255,255,255,.50);
     }
 
-    /* ✅ Small screens (extra safe) */
+    /* ✅ extra small devices safe */
     @media (max-width: 360px){
       h1{ font-size: 30px; }
       .logoBox{ width:110px; height:110px; }
@@ -275,82 +249,48 @@
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="card">
+  <div class="page">
+    <div class="wrap">
+      <div class="card">
 
-      <div class="topmini">PIRATE PLAY OFFICIAL APP</div>
+        <div class="topmini">PIRATE PLAY OFFICIAL APP</div>
 
-      <div class="hero">
-        <!-- ✅ Your uploaded logo -->
-        <div class="logoBox">
-          <img src="Web_logo.png" class="logo" alt="Pirate Play Logo">
+        <div class="hero">
+          <!-- ✅ Logo (case-sensitive name) -->
+          <div class="logoBox">
+            <img src="Web_logo.png" class="logo" alt="Pirate Play Logo">
+          </div>
+
+          <h1>Pirate Play</h1>
+          <p class="subtitle">Official Android App</p>
+
+          <div class="pills">
+            <div class="pill">📦 APK <b>74MB</b></div>
+            <div class="pill">⚡ Version <b>v1.0</b></div>
+            <div class="pill">🤖 Android <b>7.0+</b></div>
+          </div>
         </div>
 
-        <h1>Pirate Play</h1>
-        <p class="subtitle">Official Android App</p>
-
-        <div class="pills">
-          <div class="pill">📦 APK <b>74MB</b></div>
-          <div class="pill">⚡ Version <b>v1.0</b></div>
-          <div class="pill">🤖 Android <b>7.0+</b></div>
+        <div class="cta">
+          <a class="btn"
+             href="https://github.com/raazsingh9504-commits/pirateplay/releases/download/V1.0/pirate.play.2.0.apk"
+             download>
+            ⬇ Download APK
+          </a>
+          <div class="hint">Fast direct download • Official source only</div>
         </div>
+
+        <div class="grid">
+          <div class="tile"><div class="k">Version</div><div class="v">V1.0</div></div>
+          <div class="tile"><div class="k">APK Size</div><div class="v">74MB</div></div>
+          <div class="tile"><div class="k">Android</div><div class="v">7.0+</div></div>
+          <div class="tile"><div class="k">Updated</div><div class="v">2026</div></div>
+        </div>
+
+        <footer>© 2026 pirateplay.in • All rights reserved</footer>
+
       </div>
-
-      <div class="cta">
-        <a class="btn"
-           href="https://github.com/raazsingh9504-commits/pirateplay/releases/download/V1.0/pirate.play.2.0.apk"
-           download>
-          ⬇ Download APK
-        </a>
-        <div class="hint">Fast direct download • Official source only</div>
-      </div>
-
-      <div class="grid">
-        <div class="tile">
-          <div class="k">Version</div>
-          <div class="v">V1.0</div>
-        </div>
-        <div class="tile">
-          <div class="k">APK Size</div>
-          <div class="v">74MB</div>
-        </div>
-        <div class="tile">
-          <div class="k">Android</div>
-          <div class="v">7.0+</div>
-        </div>
-        <div class="tile">
-          <div class="k">Updated</div>
-          <div class="v">2026</div>
-        </div>
-      </div>
-
-      <!-- ✅ Downloads placeholder (Cloudflare worker se live banega) -->
-      <div class="downloads">
-        <div class="title">Total Downloads</div>
-        <div class="num" id="dlcount">—</div>
-      </div>
-
-      <footer>© 2026 pirateplay.in • All rights reserved</footer>
-
     </div>
   </div>
-
-  <script>
-    // ✅ This will work when you connect your Cloudflare Worker API (GET /count)
-    // For now it shows 0 until we hook worker properly
-    async function loadCount(){
-      try{
-        // yaha baad me worker ka /count endpoint dalenge
-        // example: https://pirateplay-counter.raazsingh9504.workers.dev/count
-        const url = "https://pirateplay-counter.raazsingh9504.workers.dev/count";
-        const res = await fetch(url, { cache: "no-store" });
-        const data = await res.json();
-        document.getElementById("dlcount").innerText = (data.downloads ?? 0).toLocaleString();
-      }catch(e){
-        document.getElementById("dlcount").innerText = "0";
-      }
-    }
-    loadCount();
-  </script>
 </body>
 </html>
