@@ -6,382 +6,393 @@
   <title>Pirate Play – Official Android App</title>
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      min-height: 100vh;
-      color: #fff;
-      overflow-x: hidden;
-      background: #050505;
+    :root{
+      --bg1:#05060a;
+      --bg2:#0b1220;
+      --glass: rgba(255,255,255,0.06);
+      --stroke: rgba(255,255,255,0.10);
+      --text:#ffffff;
+      --muted: rgba(255,255,255,0.70);
+      --muted2: rgba(255,255,255,0.55);
+      --accent:#ff7a18;
+      --accent2:#ffb01f;
+      --btn:#ff7a18;
+      --btn2:#ffb01f;
+      --shadow: 0 30px 80px rgba(0,0,0,0.55);
+      --radius: 22px;
     }
 
-    /* BACKGROUND */
-    .bg {
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(circle at top, rgba(255,140,0,0.18), rgba(0,0,0,0.95)),
-                  url("bg.jpg") center/cover no-repeat;
-      filter: blur(5px);
-      transform: scale(1.08);
-      z-index: -3;
+    *{ box-sizing: border-box; }
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(900px 450px at 70% 25%, rgba(255,122,24,0.20), transparent 60%),
+        radial-gradient(700px 380px at 25% 70%, rgba(255,176,31,0.12), transparent 60%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 22px 14px;
+      overflow-x:hidden;
     }
 
-    .overlay {
-      position: fixed;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.85));
-      z-index: -2;
+    .wrap{
+      width: min(480px, 100%);
     }
 
-    .container {
-      width: 100%;
-      max-width: 1020px;
-      margin: auto;
-      padding: 22px;
-    }
-
-    /* NAV */
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      padding: 14px 0;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .logo {
-      width: 72px;
-      height: 72px;
-      border-radius: 20px;
-      overflow: hidden;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.10);
-      box-shadow: 0 0 0 2px rgba(255,140,0,0.2), 0 22px 60px rgba(0,0,0,0.6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .logo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .brand h1 {
-      font-size: 20px;
-      font-weight: 900;
-      letter-spacing: 0.6px;
-    }
-
-    .brand p {
-      font-size: 12px;
-      color: rgba(255,255,255,0.75);
-      margin-top: 2px;
-    }
-
-    .chip {
-      padding: 10px 14px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      color: rgba(255,255,255,0.85);
-      backdrop-filter: blur(10px);
-      white-space: nowrap;
-    }
-
-    /* HERO */
-    .hero {
-      margin-top: 14px;
-      border-radius: 28px;
-      padding: 28px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
+    .card{
+      background: var(--glass);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
       backdrop-filter: blur(16px);
-      box-shadow: 0 30px 80px rgba(0,0,0,0.65);
+      padding: 18px;
       position: relative;
       overflow: hidden;
     }
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: -120px;
-      background: radial-gradient(circle, rgba(255,140,0,0.25), rgba(0,0,0,0));
-      z-index: -1;
+    /* glow */
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(500px 250px at 10% 10%, rgba(255,122,24,0.28), transparent 55%),
+        radial-gradient(400px 220px at 90% 15%, rgba(255,176,31,0.20), transparent 55%);
+      filter: blur(18px);
+      opacity: 0.8;
+      pointer-events:none;
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 18px;
-      align-items: center;
+    .top{
+      position: relative;
+      display:flex;
+      gap:14px;
+      align-items:center;
+      padding: 10px 10px 6px;
     }
 
-    @media (max-width: 900px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-      }
-      .logo { width: 64px; height: 64px; }
+    .logo{
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(0,0,0,0.35);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-shrink:0;
     }
 
-    .headline {
-      font-size: 36px;
-      font-weight: 950;
-      letter-spacing: 0.8px;
+    .logo img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display:block;
+    }
+
+    .titleBox{
+      flex:1;
+      min-width:0;
+    }
+
+    .appName{
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      margin:0;
       line-height: 1.1;
     }
 
-    .headline span {
-      color: #ff9800;
-      text-shadow: 0 0 18px rgba(255,152,0,0.35);
+    .sub{
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
     }
 
-    .sub {
-      margin-top: 12px;
-      font-size: 14px;
-      line-height: 1.6;
-      color: rgba(255,255,255,0.80);
-    }
-
-    /* BUTTONS */
-    .actions {
-      margin-top: 18px;
-      display: flex;
-      gap: 12px;
+    .chipRow{
+      display:flex;
+      gap:8px;
       flex-wrap: wrap;
+      margin-top:10px;
     }
 
-    .btn {
-      flex: 1;
-      min-width: 190px;
-      padding: 15px 18px;
-      border-radius: 16px;
-      font-weight: 900;
-      text-decoration: none;
-      text-align: center;
-      transition: 0.15s ease;
-      border: 1px solid rgba(255,255,255,0.10);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #ff9800, #ff3d00);
-      color: #000;
-      box-shadow: 0 18px 45px rgba(255,98,0,0.40);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 22px 55px rgba(255,98,0,0.55);
-    }
-
-    .btn-secondary {
-      background: rgba(255,255,255,0.06);
-      color: #fff;
-    }
-
-    .btn-secondary:hover {
-      transform: translateY(-2px);
-      background: rgba(255,255,255,0.09);
-    }
-
-    /* INFO CARD */
-    .info {
-      border-radius: 20px;
-      padding: 18px;
-      background: rgba(0,0,0,0.35);
-      border: 1px solid rgba(255,255,255,0.10);
-    }
-
-    .info h3 {
-      font-size: 15px;
-      font-weight: 950;
-      margin-bottom: 10px;
-      color: rgba(255,255,255,0.95);
-    }
-
-    .meta {
-      display: grid;
-      gap: 10px;
-      font-size: 13px;
-      color: rgba(255,255,255,0.85);
-    }
-
-    .row {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 12px;
-      border-radius: 14px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.10);
-    }
-
-    .row b { color: #ffb74d; }
-
-    /* DOWNLOAD COUNTER */
-    .counter {
-      margin-top: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 12px 12px;
-      border-radius: 16px;
-      background: rgba(255,152,0,0.10);
-      border: 1px solid rgba(255,152,0,0.25);
-      font-size: 13px;
-      color: rgba(255,255,255,0.92);
-    }
-
-    .counter b {
-      font-size: 16px;
-      color: #ff9800;
-      text-shadow: 0 0 14px rgba(255,152,0,0.30);
-    }
-
-    /* FEATURES */
-    .features {
-      margin-top: 18px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-
-    @media (max-width: 900px) {
-      .features { grid-template-columns: 1fr; }
-    }
-
-    .feature {
-      border-radius: 20px;
-      padding: 16px;
-      background: rgba(255,255,255,0.06);
+    .chip{
+      font-size:12px;
+      padding: 7px 10px;
+      border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.25);
+      color: rgba(255,255,255,0.82);
     }
 
-    .feature h4 {
+    .hero{
+      position: relative;
+      padding: 10px 10px 0;
+    }
+
+    .headline{
       font-size: 14px;
-      font-weight: 950;
-      margin-bottom: 8px;
+      color: var(--muted2);
+      line-height:1.6;
+      margin: 6px 0 14px;
     }
 
-    .feature p {
+    .btn{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      width:100%;
+      padding: 16px 14px;
+      border-radius: 16px;
+      border: 0;
+      cursor:pointer;
+      font-weight: 800;
+      font-size: 17px;
+      color:#120900;
+      background: linear-gradient(135deg, var(--btn), var(--btn2));
+      box-shadow: 0 18px 35px rgba(255, 122, 24, 0.25);
+      transition: transform .15s ease, box-shadow .15s ease;
+      text-decoration:none;
+      user-select:none;
+    }
+
+    .btn:active{
+      transform: scale(0.985);
+      box-shadow: 0 12px 25px rgba(255, 122, 24, 0.22);
+    }
+
+    .grid{
+      position: relative;
+      margin-top: 14px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:10px;
+      padding: 0 10px 10px;
+    }
+
+    .box{
+      border-radius: 18px;
+      padding: 14px 14px;
+      background: rgba(0,0,0,0.30);
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .boxTitle{
+      font-weight: 800;
+      font-size: 14px;
+      margin:0 0 6px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    .boxText{
+      margin:0;
+      color: var(--muted);
       font-size: 13px;
-      color: rgba(255,255,255,0.78);
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
-    footer {
-      margin-top: 18px;
-      text-align: center;
-      padding: 16px 0;
+    .details{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      margin-top: 10px;
+    }
+
+    .stat{
+      border-radius: 16px;
+      padding: 12px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .statLabel{
+      font-size: 11px;
+      color: var(--muted2);
+      margin-bottom: 6px;
+    }
+
+    .statValue{
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .downloads{
+      margin-top: 10px;
+      text-align:center;
+      padding: 12px;
+      border-radius: 16px;
+      background: rgba(255,122,24,0.10);
+      border: 1px solid rgba(255,122,24,0.22);
+    }
+
+    .downloads small{
+      display:block;
+      color: rgba(255,255,255,0.70);
+      margin-bottom: 4px;
+    }
+
+    .downloads b{
+      font-size: 20px;
+      letter-spacing: 0.3px;
+    }
+
+    .footer{
+      text-align:center;
+      margin-top: 12px;
+      color: rgba(255,255,255,0.55);
       font-size: 12px;
-      color: rgba(255,255,255,0.60);
+    }
+
+    .tip{
+      margin-top: 10px;
+      color: rgba(255,255,255,0.55);
+      font-size: 12px;
+      text-align:center;
+    }
+
+    .mini{
+      font-size: 11px;
+      color: rgba(255,255,255,0.55);
+      margin-top: 8px;
+      text-align:center;
     }
   </style>
 </head>
 
 <body>
-  <div class="bg"></div>
-  <div class="overlay"></div>
+  <div class="wrap">
+    <div class="card">
 
-  <div class="container">
-    <header>
-      <div class="brand">
+      <div class="top">
         <div class="logo">
-          <img src="web_logo.png" alt="Pirate Play Logo">
-        </div>
-        <div>
-          <h1>Pirate Play</h1>
-          <p>Official Android App • Fast & Cinematic Experience</p>
-        </div>
-      </div>
-
-      <div class="chip">APK • 74MB • v1.0</div>
-    </header>
-
-    <section class="hero">
-      <div class="hero-grid">
-        <div>
-          <div class="headline">Download <span>Pirate Play</span></div>
-          <div class="sub">
-            One tap download. Smooth UI. Optimized for Android.<br>
-            Official Website: <b>pirateplay.in</b>
-          </div>
-
-          <div class="actions">
-            <a class="btn btn-primary"
-               id="downloadBtn"
-               href="https://github.com/raazsingh9504-commits/pirateplay/releases/download/V1.0/pirate.play.2.0.apk"
-               download>
-              ⬇ Download APK
-            </a>
-
-            <a class="btn btn-secondary" href="#appinfo">
-              ⚡ App Info
-            </a>
-          </div>
-
-          <div class="features">
-            <div class="feature">
-              <h4>⚔️ Badass Performance</h4>
-              <p>Super smooth experience with modern, premium UI style.</p>
-            </div>
-            <div class="feature">
-              <h4>🚀 Fast Download</h4>
-              <p>Direct APK link with one click install-ready download.</p>
-            </div>
-            <div class="feature">
-              <h4>🛡️ Official Source</h4>
-              <p>Only download from pirateplay.in to avoid fake copies.</p>
-            </div>
-          </div>
+          <!-- ✅ IMPORTANT: filename must match exactly -->
+          <img src="Web_logo.png" alt="Pirate Play Logo" />
         </div>
 
-        <div class="info" id="appinfo">
-          <h3>App Details</h3>
-          <div class="meta">
-            <div class="row"><span>Version</span><b>V1.0</b></div>
-            <div class="row"><span>APK Size</span><b>74MB</b></div>
-            <div class="row"><span>Android</span><b>7.0+</b></div>
-            <div class="row"><span>Updated</span><b>2026</b></div>
-          </div>
+        <div class="titleBox">
+          <h1 class="appName">Pirate Play</h1>
+          <div class="sub">Official Android App</div>
 
-          <div class="counter">
-            <span>🔥 Total Downloads</span>
-            <b id="downloadCount">Loading...</b>
-          </div>
-
-          <div style="margin-top:10px; font-size:12px; color:rgba(255,255,255,0.65); line-height:1.5;">
-            ⚠️ Install Tip: Settings → Security → Allow Unknown Sources (if needed).
+          <div class="chipRow">
+            <div class="chip">APK • 74MB</div>
+            <div class="chip">Version • v1.0</div>
+            <div class="chip">Android • 7.0+</div>
           </div>
         </div>
       </div>
-    </section>
 
-    <footer>
-      © 2026 pirateplay.in • All rights reserved
-    </footer>
+      <div class="hero">
+        <p class="headline">
+          One tap download. Smooth UI. Optimized for Android.
+          <br>
+          Official Website: <b>pirateplay.in</b>
+        </p>
+
+        <!-- ✅ Download Button -->
+        <a class="btn"
+           id="downloadBtn"
+           href="https://github.com/raazsingh9504-commits/pirateplay/releases/download/V1.0/pirate.play.2.0.apk">
+          ⬇️ Download APK
+        </a>
+
+        <div class="mini">Tip: Settings → Security → Allow Unknown Sources (if needed)</div>
+      </div>
+
+      <div class="grid">
+
+        <div class="box">
+          <div class="boxTitle">⚡ Badass Performance</div>
+          <p class="boxText">Super smooth experience with modern, premium UI style.</p>
+        </div>
+
+        <div class="box">
+          <div class="boxTitle">🚀 Fast Download</div>
+          <p class="boxText">Direct APK link with one click install-ready download.</p>
+        </div>
+
+        <div class="box">
+          <div class="boxTitle">🛡️ Official Source</div>
+          <p class="boxText">Only download from pirateplay.in to avoid fake copies.</p>
+        </div>
+
+        <div class="details">
+          <div class="stat">
+            <div class="statLabel">Version</div>
+            <div class="statValue">V1.0</div>
+          </div>
+          <div class="stat">
+            <div class="statLabel">APK Size</div>
+            <div class="statValue">74MB</div>
+          </div>
+        </div>
+
+        <!-- ✅ Download counter -->
+        <div class="downloads">
+          <small>Total Downloads</small>
+          <b id="downloadCount">—</b>
+        </div>
+
+        <div class="tip">
+          This counter will be live after Cloudflare Worker setup ✅
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="footer">© 2026 pirateplay.in • All rights reserved</div>
   </div>
 
   <script>
-    // Demo counter (abhi fake). Real counter ke liye Cloudflare Worker+KV set karenge next.
-    // Tumhare visitors ko professional feel milega.
-    let demoCount = 12840;
-    document.getElementById("downloadCount").innerText = demoCount.toLocaleString();
+    // ✅ Cloudflare Worker API (we will create next)
+    // Example: https://api.pirateplay.in/count
+    // We'll set this later, abhi placeholder hai.
+    const API_BASE = ""; // leave empty for now
 
-    document.getElementById("downloadBtn").addEventListener("click", () => {
-      demoCount++;
-      document.getElementById("downloadCount").innerText = demoCount.toLocaleString();
+    const countEl = document.getElementById("downloadCount");
+    const btn = document.getElementById("downloadBtn");
+
+    // ✅ If API not configured yet -> show default
+    function showFallback(){
+      countEl.textContent = "12,840"; // Temporary fake count (remove later)
+    }
+
+    async function loadCount(){
+      try{
+        if(!API_BASE){
+          showFallback();
+          return;
+        }
+        const res = await fetch(API_BASE + "/count");
+        const data = await res.json();
+        countEl.textContent = (data.downloads || 0).toLocaleString("en-IN");
+      }catch(e){
+        showFallback();
+      }
+    }
+
+    async function incrementCount(){
+      try{
+        if(!API_BASE) return;
+        await fetch(API_BASE + "/hit", { method:"POST" });
+      }catch(e){}
+    }
+
+    btn.addEventListener("click", async () => {
+      // user click -> increment count (Cloudflare worker)
+      incrementCount();
     });
+
+    loadCount();
   </script>
 </body>
-  </html>
+</html>
