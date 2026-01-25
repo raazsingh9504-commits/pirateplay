@@ -5,11 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Pirate Play – Official Android App</title>
 
-  <!-- ✅ PWA -->
-  <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#ff7a00">
-  <link rel="apple-touch-icon" href="Web_logo.png">
-
   <style>
     :root{
       --bg1:#0b0f14;
@@ -31,11 +26,13 @@
       margin:0;
       font-family: system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
       color: var(--text);
+
       background:
         radial-gradient(700px 400px at 20% 10%, rgba(255,140,0,.20), transparent 55%),
         radial-gradient(700px 450px at 80% 0%, rgba(255,90,0,.18), transparent 60%),
         radial-gradient(900px 650px at 50% 100%, rgba(255,160,50,.10), transparent 60%),
         linear-gradient(135deg, var(--bg1), var(--bg2));
+
       padding: 26px 14px 28px;
       padding-top: calc(26px + env(safe-area-inset-top));
       min-height: 100vh;
@@ -185,64 +182,9 @@
       transition: transform .15s ease, box-shadow .15s ease;
       user-select:none;
       -webkit-tap-highlight-color: transparent;
-      position:relative;
-      overflow:hidden;
     }
     .btn:active{ transform: scale(.98); }
     .btn[disabled]{ opacity:.70; cursor:not-allowed; }
-
-    /* ✅ Loader inside download button */
-    .btnLoading{
-      color: rgba(0,0,0,.65);
-    }
-    .btnLoading::after{
-      content:"";
-      position:absolute;
-      left:-35%;
-      top:0;
-      height:100%;
-      width:35%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.40), transparent);
-      animation: shimmer 1s linear infinite;
-    }
-    @keyframes shimmer{
-      0%{ transform: translateX(0); }
-      100%{ transform: translateX(320%); }
-    }
-
-    .progressWrap{
-      width:100%;
-      background: rgba(0,0,0,.25);
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: 14px;
-      padding: 10px 12px;
-      display:none;
-      box-shadow: 0 10px 30px rgba(0,0,0,.35);
-    }
-    .progressTop{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      font-size:12px;
-      font-weight:900;
-      letter-spacing:.06em;
-      color: rgba(255,255,255,.75);
-      margin-bottom:8px;
-      text-transform: uppercase;
-    }
-    .bar{
-      height: 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.10);
-      overflow:hidden;
-    }
-    .barFill{
-      height:100%;
-      width:0%;
-      border-radius:999px;
-      background: linear-gradient(135deg, var(--orange1), var(--orange2));
-      transition: width .25s ease;
-    }
 
     .btnGuide{
       width: 100%;
@@ -351,72 +293,6 @@
       color: rgba(255,255,255,.50);
     }
 
-    /* ✅ PWA Install Toast */
-    .toast{
-      position: fixed;
-      left: 50%;
-      bottom: calc(16px + env(safe-area-inset-bottom));
-      transform: translateX(-50%);
-      width: min(92vw, 420px);
-      z-index: 9998;
-      display:none;
-      background: rgba(10,10,10,.85);
-      border: 1px solid rgba(255,255,255,.14);
-      border-radius: 16px;
-      padding: 12px 12px;
-      box-shadow: 0 22px 70px rgba(0,0,0,.65);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-    .toast.show{ display:flex; }
-    .toastRow{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      width:100%;
-    }
-    .toastRow img{
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      object-fit: cover;
-      border: 1px solid rgba(255,255,255,.12);
-    }
-    .toastText{
-      flex:1;
-      min-width:0;
-    }
-    .toastText .t1{
-      font-weight:950;
-      font-size: 13px;
-      letter-spacing:.05em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.92);
-    }
-    .toastText .t2{
-      font-size:12px;
-      color: rgba(255,255,255,.60);
-      margin-top:2px;
-    }
-    .toastBtn{
-      border:none;
-      cursor:pointer;
-      font-weight:950;
-      padding: 10px 12px;
-      border-radius: 12px;
-      color: #140a00;
-      background: linear-gradient(135deg, var(--orange1), var(--orange2));
-    }
-    .toastClose{
-      border:none;
-      cursor:pointer;
-      font-weight:950;
-      padding: 10px 12px;
-      border-radius: 12px;
-      color: rgba(255,255,255,.88);
-      background: rgba(255,255,255,.10);
-    }
-
     /* ✅ POPUP / MODAL */
     .modal{
       position: fixed;
@@ -499,7 +375,7 @@
     .slide img{
       width: 100%;
       height: auto;
-      max-height: 50vh;
+      max-height: 52vh;
       object-fit: contain;
       border-radius: 14px;
       border: 1px solid rgba(255,255,255,.12);
@@ -525,8 +401,6 @@
       font-weight: 950;
       cursor:pointer;
       min-width: 92px;
-      position:relative;
-      overflow:hidden;
     }
     .navBtn:active{ transform: scale(.98); }
     .navBtn[disabled]{ opacity:.40; cursor:not-allowed; }
@@ -558,30 +432,13 @@
       text-align:center;
     }
 
-    /* ✅ Auto Next Hint Arrow */
-    .nextHint::after{
-      content:"➜";
-      position:absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-weight: 950;
-      color: rgba(255,140,0,.95);
-      animation: bounceArrow 0.9s ease-in-out infinite;
-    }
-    @keyframes bounceArrow{
-      0%{ transform: translateY(-50%) translateX(0); opacity:.5; }
-      50%{ transform: translateY(-50%) translateX(6px); opacity:1; }
-      100%{ transform: translateY(-50%) translateX(0); opacity:.5; }
-    }
-
     @media (max-width: 360px){
       h1{ font-size: 30px; }
       .logoBox{ width:112px; height:112px; }
       .btn{ font-size: 17px; padding: 16px; }
       .counterNum{ font-size: 30px; }
       .modalBox{ max-height: 72vh; }
-      .slide img{ max-height: 48vh; }
+      .slide img{ max-height: 50vh; }
     }
   </style>
 </head>
@@ -610,14 +467,6 @@
 
         <div class="cta">
           <button class="btn" id="downloadBtn">⬇ Download APK</button>
-
-          <div class="progressWrap" id="progressWrap">
-            <div class="progressTop">
-              <span>Downloading</span>
-              <span id="progressText">0%</span>
-            </div>
-            <div class="bar"><div class="barFill" id="barFill"></div></div>
-          </div>
 
           <div class="bannerWrap">
             <img src="And_banner.png" class="banner" alt="Pirate Play Banner">
@@ -672,19 +521,6 @@
     </div>
   </div>
 
-  <!-- ✅ PWA INSTALL TOAST -->
-  <div class="toast" id="toast">
-    <div class="toastRow">
-      <img src="Web_logo.png" alt="App Icon">
-      <div class="toastText">
-        <div class="t1">Install Pirate Play</div>
-        <div class="t2">Add to Home Screen (PWA)</div>
-      </div>
-      <button class="toastBtn" id="installBtn">Install</button>
-      <button class="toastClose" id="closeToast">✕</button>
-    </div>
-  </div>
-
   <script>
     // ✅ Links
     const APK_URL = "https://github.com/raazsingh9504-commits/pirateplay/releases/download/V1.0/pirate.play.2.0.apk";
@@ -696,10 +532,6 @@
 
     const countEl = document.getElementById("count");
     const btn = document.getElementById("downloadBtn");
-
-    const progressWrap = document.getElementById("progressWrap");
-    const progressText = document.getElementById("progressText");
-    const barFill = document.getElementById("barFill");
 
     const modal = document.getElementById("modal");
     const guideBtn = document.getElementById("guideBtn");
@@ -722,7 +554,6 @@
       modal.classList.add("show");
       slider.scrollTo({ left: 0, behavior: "instant" });
       updateUI(0);
-      updateNextHint(0);
     }
 
     function closeGuide(){
@@ -757,13 +588,86 @@
 
     function updateUI(idx){
       stepLabel.textContent = `Step ${idx + 1} / ${TOTAL}`;
+
       const dots = dotsWrap.querySelectorAll(".dot");
       dots.forEach((d,i)=> d.classList.toggle("active", i===idx));
+
       prevBtn.disabled = idx === 0;
       nextBtn.disabled = idx === TOTAL - 1;
     }
 
-    function updateNextHint(idx){
-      // show hint only on first slide
-      if(idx === 0){
-        nextBtn.classList.add("nextHint
+    function goTo(idx){
+      const w = slider.clientWidth;
+      slider.scrollTo({ left: idx * w, behavior: "smooth" });
+      updateUI(idx);
+    }
+
+    prevBtn.addEventListener("click", () => {
+      const idx = getIndex();
+      goTo(idx - 1);
+    });
+
+    nextBtn.addEventListener("click", () => {
+      const idx = getIndex();
+      goTo(idx + 1);
+    });
+
+    slider.addEventListener("scroll", () => {
+      // Smooth UI update on swipe
+      window.requestAnimationFrame(() => {
+        updateUI(getIndex());
+      });
+    });
+
+    async function loadCount(){
+      countEl.textContent = "—";
+      try{
+        const res = await fetch(COUNT_URL + "?t=" + Date.now(), { cache: "no-store" });
+        const data = await res.json();
+        if(typeof data.downloads === "number"){
+          countEl.textContent = formatNumber(data.downloads);
+        } else {
+          countEl.textContent = "—";
+        }
+      }catch(err){
+        countEl.textContent = "—";
+      }
+    }
+
+    async function incrementAndDownload(){
+      btn.disabled = true;
+      btn.textContent = "⏳ Downloading...";
+
+      // ✅ Start download first
+      window.location.href = APK_URL;
+
+      // ✅ Update counter
+      try{
+        const res = await fetch(INC_URL + "?t=" + Date.now(), { cache: "no-store" });
+        const data = await res.json();
+        if(typeof data.downloads === "number"){
+          countEl.textContent = formatNumber(data.downloads);
+        }
+      }catch(e){
+        // ignore
+      }
+
+      // ✅ 1 sec later show guide popup
+      setTimeout(() => {
+        openGuide();
+      }, 1000);
+
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.textContent = "⬇ Download APK";
+      }, 2000);
+    }
+
+    // ✅ Load counter on open
+    loadCount();
+
+    // ✅ Download click
+    btn.addEventListener("click", incrementAndDownload);
+  </script>
+</body>
+</html>
