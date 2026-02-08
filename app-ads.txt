@@ -170,3 +170,12 @@ themediagrid.com, sjyvmz, reseller, 35d5010d7789b49d
 triplelift.com, 9342, reseller, 6c33edb13117fd86
 netaddiction.it, 2037, reseller
 pubmatic.com, 156423, reseller, 5d62403b186f2ace
+
+apester.com, 91071, direct
+rubiconproject.com, 27784, reseller, 0bfd66d529a55807
+lijit.com, 402418, reseller, fafdf38b16bf6b2b
+pinklion.io, 190976892, direct
+display.io, 224613, reseller
+bidease.com, bidease_seller_49, reseller
+sovrn.com, 400766, reseller, fafdf38b16bf6b2b
+peak226.com, 12900, reseller
